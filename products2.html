@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .product h3 {
+            margin: 0;
+            font-weight: bold;
+        }
+        .product p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product List</h1>
+    <div id="products-container"></div>
+
+    <!-- Include jQuery from a CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Use $.get to load the products.json file
+        $.get('products.json', function(data) {
+            const products = data; // Store the JSON data
+
+            // Generate the HTML for each product
+            let productsHTML = '';
+            products.forEach(product => {
+                productsHTML += `
+                    <div class="product">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <p><strong>Price:</strong> ${product.price}</p>
+                        <p><strong>Categories:</strong> ${product.categories.join(', ')}</p>
+                    </div>
+                `;
+            });
+
+            // Set the innerHTML of the products-container div
+            document.getElementById('products-container').innerHTML = productsHTML;
+        }).fail(function() {
+            // Display an error message if the JSON file fails to load
+            document.getElementById('products-container').innerHTML = "<div class='error-message'>Error: Could not load product data.</div>";
+        });
+    </script>
+</body>
+</html>
+
