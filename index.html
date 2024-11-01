@@ -28,14 +28,11 @@
     <h1>Product List</h1>
     <div id="products-container"></div>
 
-    <!-- Include jQuery from a CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Use $.get to load the products.json file
         $.get('products.json', function(data) {
             const products = data; // Store the JSON data
 
-            // Generate the HTML for each product
             let productsHTML = '';
             products.forEach(product => {
                 productsHTML += `
@@ -48,10 +45,8 @@
                 `;
             });
 
-            // Set the innerHTML of the products-container div
             document.getElementById('products-container').innerHTML = productsHTML;
         }).fail(function() {
-            // Display an error message if the JSON file fails to load
             document.getElementById('products-container').innerHTML = "<div class='error-message'>Error: Could not load product data.</div>";
         });
     </script>
